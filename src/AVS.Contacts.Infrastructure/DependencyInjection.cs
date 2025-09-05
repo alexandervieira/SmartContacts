@@ -1,3 +1,4 @@
+using AVS.Contacts.Contracts.Services;
 using AVS.Contacts.Domain.Repositories;
 using AVS.Contacts.Infrastructure.Authentication;
 using AVS.Contacts.Infrastructure.Mongo.Configuration;
@@ -12,9 +13,10 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<MongoSettings>(configuration.GetSection("MongoSettings"));
-        services.Configure<AuthSettings>(configuration.GetSection("AzureAdB2C"));
+        services.Configure<AuthSettings>(configuration.GetSection("AzureB2C"));
 
         services.AddScoped<IContactRepository, ContactRepository>();
+        services.AddSingleton<IAuthService, AzureB2CAuthService>();
 
         return services;
     }
