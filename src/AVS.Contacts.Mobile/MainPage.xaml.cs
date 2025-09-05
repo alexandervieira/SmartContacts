@@ -1,23 +1,22 @@
-﻿namespace AVS.Contacts.Mobile;
+using AVS.Contacts.Mobile.ViewModels;
+using AVS.Contacts.Mobile.Views;
+
+namespace AVS.Contacts.Mobile;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage(MainPageViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
-
-	private void OnCounterClicked(object? sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private async void OnContactsClicked(object sender, EventArgs e)
+    {
+        var contactsPage = Handler?.MauiContext?.Services.GetService<ContactsPage>();
+        if (contactsPage != null)
+        {
+            await Navigation.PushAsync(contactsPage);
+        }
+    }
 }

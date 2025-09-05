@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\AVS.Contacts.Domain\AVS.Contacts.Domain.csproj" />
+    <ProjectReference Include="..\..\src\AVS.Contacts.Application\AVS.Contacts.Application.csproj" />
+    <ProjectReference Include="..\..\src\AVS.Contacts.Contracts\AVS.Contacts.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

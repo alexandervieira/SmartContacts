@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="AVS.Contacts.Mobile.Views.ContactsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Contatos">
+
+    <Grid>
+        <CollectionView ItemsSource="{Binding Contacts}" IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15" RowDefinitions="Auto,Auto,Auto">
+                        <Label Grid.Row="0" Text="{Binding FirstName, StringFormat='{0} {1}'}" FontSize="18" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Text="{Binding Street, StringFormat='{0}, {1} - {2}, {3}'}" FontSize="14" TextColor="Gray" />
+                        <Label Grid.Row="2" Text="{Binding Phone}" FontSize="14" TextColor="Blue" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
+
+        <Label Text="Nenhum contato encontrado" 
+               IsVisible="{Binding Contacts.Count, Converter={StaticResource CountToBoolConverter}}"
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               FontSize="18" 
+               TextColor="Gray" />
+    </Grid>
+
+</ContentPage>
