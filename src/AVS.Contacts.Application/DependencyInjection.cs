@@ -1,5 +1,6 @@
 using AVS.Contacts.Application.Behaviors;
 using AVS.Contacts.Application.Mappings;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,6 +13,9 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(typeof(ContactProfile));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
         return services;
